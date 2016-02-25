@@ -1,0 +1,8 @@
+/var/log/indigopiface.log {
+  rotate 30
+  daily
+  compress
+  missingok
+  notifempty
+  create 0640 root root
+}

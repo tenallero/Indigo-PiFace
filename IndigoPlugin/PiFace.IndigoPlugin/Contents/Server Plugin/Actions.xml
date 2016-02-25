@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<Actions>	
+	<Action id="turnOnOutput" deviceFilter="self">
+		<Name>Turn On Output</Name>
+		<CallbackMethod>turnOnOutput</CallbackMethod>
+		<ConfigUI>
+			<Field id="description" type="textfield" hidden="true">
+				<Label>runtime calculated</Label>
+			</Field>
+			<Field id="channelSel" type="menu">
+				<Label>Turn On:</Label>
+				<List class="self" method="menuGetOutputs" />
+			</Field>
+			<Field id="sep1" type="separator" />
+			<Field id="turnOnButton" type="button">
+				<Label>Test:</Label>
+				<Title>Turn On</Title>
+				<CallbackMethod>buttonTurnOnHit</CallbackMethod>
+			</Field>
+			<Field id="turnOffButton" type="button">
+				<Label></Label>
+				<Title>Turn Off</Title>
+				<CallbackMethod>buttonTurnOffHit</CallbackMethod>
+			</Field>
+		</ConfigUI>
+	</Action>
+	<Action id="turnOffOutput" deviceFilter="self">
+		<Name>Turn Off Output</Name>
+		<CallbackMethod>turnOffOutput</CallbackMethod>
+		<ConfigUI>
+			<Field id="description" type="textfield" hidden="true">
+				<Label>runtime calculated</Label>
+			</Field>
+			<Field id="channelSel" type="menu">
+				<Label>Turn Off:</Label>
+				<List class="self" method="menuGetOutputs" />
+			</Field>
+			<Field id="sep1" type="separator" />
+			<Field id="turnOnButton" type="button">
+				<Label>Test:</Label>
+				<Title>Turn On</Title>
+				<CallbackMethod>buttonTurnOnHit</CallbackMethod>
+			</Field>
+			<Field id="turnOffButton" type="button">
+				<Label></Label>
+				<Title>Turn Off</Title>
+				<CallbackMethod>buttonTurnOffHit</CallbackMethod>
+			</Field>
+		</ConfigUI>
+	</Action>
+</Actions>

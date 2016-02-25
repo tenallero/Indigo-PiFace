@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<Devices>
+    <!-- PiFace Device -->
+    <Device type="custom" id="PiFaceBoard">
+        <Name>PiFace Board</Name>
+        <ConfigUI>
+ 
+            <Field id="label2" type="label">
+                <Label>Connection from Indigo to PiFace</Label>
+            </Field>
+            <Field id="simpleSeparator1" type="separator"/>
+            <Field id="portintro1" type="label" fontSize="small" fontColor="darkgray">
+                <Label>You can send commands to a PiFace device in your LAN.</Label>
+            </Field>
+            <Field id="portintro2" type="label" fontSize="small" fontColor="darkgray">
+                <Label>Every RaspberryPI has an IP address and TCP port where they are listening for these commands.</Label>
+            </Field>            
+            <Field id="address" type="textfield">
+                <Label>RaspberryPI IP Address:</Label>
+                <Description>Enter the IP address of your RaspberryPI</Description>
+            </Field>
+            <Field id="port" type="textfield" defaultValue="8980" >
+                <Label>TCP Port:</Label>
+                <Description>Enter the TCP port where this PiFace daemon is listening</Description>
+            </Field>            
+        </ConfigUI>
+        <UiDisplayStateId>state</UiDisplayStateId>
+        <States>          
+            <State id="state" defaultValue="Off">
+                <ValueType>
+                    <List>
+                        <Option value="On">On</Option>
+                        <Option value="Off">Off</Option>                        
+                    </List>
+                </ValueType>
+                <TriggerLabel>PiFace State Changed</TriggerLabel>
+                <TriggerLabelPrefix>PiFace is</TriggerLabelPrefix>
+                <ControlPageLabel>PiFace is</ControlPageLabel>
+                <ControlPageLabelPrefix>PiFace is</ControlPageLabelPrefix>
+            </State>
+            <State id="temp" defaultValue="0.0">
+                <ValueType>Number</ValueType>
+                <TriggerLabel>Temperature (ºC)</TriggerLabel>
+                <TriggerLabelPrefix>Temperature (ºC)</TriggerLabelPrefix>
+                <ControlPageLabel>Temperature (ºC)</ControlPageLabel>
+                <ControlPageLabelPrefix>Temperature (ºC)</ControlPageLabelPrefix>
+            </State>
+             <State id="cpu" defaultValue="0">
+                <ValueType>Number</ValueType>
+                <TriggerLabel>CPU (%)</TriggerLabel>
+                <TriggerLabelPrefix>>CPU (%)</TriggerLabelPrefix>
+                <ControlPageLabel>>CPU (%)</ControlPageLabel>
+                <ControlPageLabelPrefix>>CPU (%)</ControlPageLabelPrefix>
+            </State>
+            <State id="input1">
+                <ValueType boolType="OnOff">Boolean</ValueType>
+                <TriggerLabel>Input Channel 1</TriggerLabel>
+                <ControlPageLabel>Input Channel 1</ControlPageLabel>
+            </State>
+            <State id="input2">
+                <ValueType boolType="OnOff">Boolean</ValueType>
+                <TriggerLabel>Input Channel 2</TriggerLabel>
+                <ControlPageLabel>Input Channel 2</ControlPageLabel>
+            </State>
+            <State id="input3">
+                <ValueType boolType="OnOff">Boolean</ValueType>
+                <TriggerLabel>Input Channel 3</TriggerLabel>
+                <ControlPageLabel>Input Channel 3</ControlPageLabel>
+            </State>
+            <State id="input4">
+                <ValueType boolType="OnOff">Boolean</ValueType>
+                <TriggerLabel>Input Channel 4</TriggerLabel>
+                <ControlPageLabel>Input Channel 4</ControlPageLabel>
+            </State>
+            <State id="input5">
+                <ValueType boolType="OnOff">Boolean</ValueType>
+                <TriggerLabel>Input Channel 5</TriggerLabel>
+                <ControlPageLabel>Input Channel 5</ControlPageLabel>
+            </State>
+            <State id="input6">
+                <ValueType boolType="OnOff">Boolean</ValueType>
+                <TriggerLabel>Input Channel 6</TriggerLabel>
+                <ControlPageLabel>Input Channel 6</ControlPageLabel>
+            </State>
+            <State id="input7">
+                <ValueType boolType="OnOff">Boolean</ValueType>
+                <TriggerLabel>Input Channel 7</TriggerLabel>
+                <ControlPageLabel>Input Channel 7</ControlPageLabel>
+            </State>
+            <State id="input8">
+                <ValueType boolType="OnOff">Boolean</ValueType>
+                <TriggerLabel>Input Channel 8</TriggerLabel>
+                <ControlPageLabel>Input Channel 8</ControlPageLabel>
+            </State>
+            <State id="relay1">
+                <ValueType boolType="OnOff">Boolean</ValueType>
+                <TriggerLabel>Relay 1</TriggerLabel>
+                <ControlPageLabel>Relay 1</ControlPageLabel>
+            </State>
+            <State id="relay2">
+                <ValueType boolType="OnOff">Boolean</ValueType>
+                <TriggerLabel>Relay 2</TriggerLabel>
+                <ControlPageLabel>Relay 2</ControlPageLabel>
+            </State>
+        </States>
+    </Device>
+    <Device type="relay" id="PiFaceOutput">
+        <Name>PiFace Output Mirror</Name>
+        <ConfigUI>
+            <SupportURL></SupportURL>
+            <Field id="boardSel" type="menu">
+                <Label>Mirror Piface:</Label>
+                <List class="self" method="menuGetDevsWithOutputs" />
+                <CallbackMethod>menuClearSelDev</CallbackMethod>
+            </Field>
+            <Field id="pinSel" type="menu">
+                <Label>Mirror output:</Label>
+                <List class="self" method="menuGetOutputsForSelDev" dynamicReload="yes" />
+            </Field>
+            <Field id="address" type="textfield" hidden="true">
+                <Label>Pin address</Label>
+            </Field>
+        </ConfigUI>
+     </Device>    
+       <Device type="sensor" id="PiFaceInput">
+        <Name>PiFace Input Mirror</Name>
+        <ConfigUI>
+            <SupportURL></SupportURL>
+            <Field id="boardSel" type="menu">
+                <Label>Mirror Piface:</Label>
+                <List class="self" method="menuGetDevsWithInputs" />
+                <CallbackMethod>menuClearSelDev</CallbackMethod>
+            </Field>
+            <Field id="pinSel" type="menu">
+                <Label>Mirror input:</Label>
+                <List class="self" method="menuGetInputsForSelDev" dynamicReload="yes" />
+            </Field>
+            <Field id="address" type="textfield" hidden="true">
+                <Label>Pin address</Label>
+            </Field>
+        </ConfigUI>
+    </Device>    
+</Devices>
