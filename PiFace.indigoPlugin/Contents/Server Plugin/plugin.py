@@ -10,13 +10,14 @@ import math
 import decimal
 import datetime
 from xml.etree import ElementTree as ET
-
+from ghpu import GitHubPluginUpdater
 
 class Plugin(indigo.PluginBase):
 
     def __init__(self, pluginId, pluginDisplayName, pluginVersion, pluginPrefs):
         indigo.PluginBase.__init__(self, pluginId, pluginDisplayName, pluginVersion, pluginPrefs)
-
+        self.updater = GitHubPluginUpdater(self)
+        
         # Port
         self.listenPortDef = 8989
         self.listenPort    = 0
@@ -103,7 +104,9 @@ class Plugin(indigo.PluginBase):
         s.close()
 
         self.debugLog("Local IP address: " + self.localAddress)
-
+        self.updater.checkForUpdate()       
+        
+        
     def shutdown(self):
         self.debugLog(u"shutdown called")
 
@@ -606,3 +609,31 @@ class Plugin(indigo.PluginBase):
     def dummyVal (self,dev):
         return
 
+    ########################################
+    # Menu Methods
+    ########################################
+    def toggleDebugging(self):
+        if self.debug:
+            indigo.server.log("Turning off debug logging")
+            self.pluginPrefs["debugEnabled"] = False                
+        else:
+            indigo.server.log("Turning on debug logging")
+            self.pluginPrefs["debugEnabled"] = True
+        self.debug = not self.debug
+        return
+        
+    def menuDeviceDiscovery(self):
+        if self.discoveryWorking:
+            return
+        self.deviceDiscover()
+        return
+        
+    def checkForUpdates(self):
+        update = self.updater.checkForUpdate() 
+        if (update != None):
+            pass
+        return    
+
+    def updatePlugin(self):
+        self.updater.update()
+        
